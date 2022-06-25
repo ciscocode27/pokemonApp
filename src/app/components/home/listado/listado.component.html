@@ -1,3 +1,5 @@
+<app-alert [message]="messageAlert" [code]="codeMsg" (closeAlertEvent)="closeAlert($event)" *ngIf="showAlert" ></app-alert>
+
 <div class="content-listado">
     Listado de Pokemon
     <div class="acciones">
@@ -117,7 +119,7 @@
                 </div>
             </div>
     
-            <div class="content-btn-option"> {{ submitted }}
+            <div class="content-btn-option">
                 <button class="btn-add"  [disabled]="form.name.errors || form.image.errors || submitted " >
                     <i class="fas fa-save"></i>
                     Guardar

@@ -17,6 +17,9 @@ export class ListadoComponent implements OnInit {
     formAction: FormGroup;
     submitted:boolean = false;
     pokemonUpdate:ResponsePokemon;
+    showAlert:boolean = false;
+    messageAlert:string = '';
+    codeMsg:number = 200;
 
   constructor(private pokemonService: PokemonService,
     private formBuilder: FormBuilder) { }
@@ -100,9 +103,13 @@ export class ListadoComponent implements OnInit {
     this.pokemonService.createUpdatePokemon(pokemon, this.typeForm,idPokemon)
         .subscribe( resp=>{
             console.log(resp);
+            let typeString:string = 'creado';
+            if( this.typeForm === TipoAccion.Update )  typeString = 'actualizado';
+            this.getShowAlert(`Pokemon ${typeString} exitosamente!`,200);
             this.getAllPokemons();
             this.submitted = false;
         },error=>{
+            this.getShowAlert('Ocurrió un error inesperado!',400);
             this.submitted = false;
         })
   }
@@ -113,11 +120,22 @@ export class ListadoComponent implements OnInit {
     this.pokemonService.deletePokemon(pokemon.id)
         .subscribe( resp=>{
             console.log(resp);
+            this.getShowAlert(`Pokemon eliminado exitosamente!`,200);
             this.getAllPokemons();
             this.submitted = false;
         },error=>{
             this.submitted = false;
         })
   }
+
+  getShowAlert(msg:string, code:number){
+    this.codeMsg = code;
+    this.showAlert = true;
+    this.messageAlert = msg;
+  }
+
+  closeAlert(event){
+    this.showAlert = false;
+}
 
 }
