@@ -27,7 +27,9 @@ div.content-listado{
         background-color: white;
         table{
             width: 100%;
-            border: 2px solid #8c9ca9;
+            border-top: 2px  solid #8c9ca9;
+            border-left: 2px  solid #8c9ca9;
+            border-right: 2px  solid #8c9ca9;
             border-spacing: 0px;
             th{
                 border-left: 2px solid #8c9ca9;
@@ -41,19 +43,68 @@ div.content-listado{
                 tr{
                     td{
                         border-left: 2px solid #8c9ca9;
-                        border-top: 2px solid #8c9ca9;
+                        border-bottom: 2px solid #8c9ca9;
                         padding: 8px 12px;
                         &:first-child{
                             border-left: none;
                         }
-                    }
-                    &:first-child{
-                        td{
-                            border-top: none;
+                        &.center{
+                            text-align: center;
                         }
+                        &.btn-acciones{
+                            button{
+                                border:none;
+                                margin: 0px 8px;
+                                color: var(--color-principal-btn);
+                                background-color: white;
+                                i{
+                                    font-size: 20px;
+                                }
+                            }
+                        }
+                        
                     }
                 }
             }
+        }
+    }
+}
+
+div.content-form{
+    margin-top: 30px;
+    border: 2px solid #8c9ca9;
+    padding: 20px 60px;
+    background-color: white;
+    div.title-form{
+        font-size: 18px;
+        display: flex;
+        justify-content: space-around;
+    }
+    div.seccion{
+        padding-top: 15px;
+        display: flex;
+        justify-content: space-between;
+        label{
+            margin-right: 5px;
+        }
+        .error-text{
+            font-size: 13px;
+            color:red;
+        }
+    }
+    div.content-btn-option{
+        margin-top: 30px;
+        display: flex;
+        justify-content: center;
+        button{
+            background-color: var(--color-principal-btn);
+            color: white;
+            height: 40px;
+            border: none;
+            padding: 0px 22px;
+            font-size: 15px;
+            border-radius: 4px;
+            margin: 0px 7px;
         }
     }
 }

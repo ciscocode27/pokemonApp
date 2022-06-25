@@ -8,3 +8,9 @@ export interface ResponsePokemon {
     type:      string;
     id_author: number;
 }
+
+export enum TipoAccion {
+    Create = 'CREATE',
+    Update = 'Update',
+    Delete = 'DELETE'
+  }

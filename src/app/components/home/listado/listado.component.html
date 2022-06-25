@@ -2,11 +2,11 @@
     Listado de Pokemon
     <div class="acciones">
         <div class="content-buscador">
-            <input type="text" class="input-control input-search" placeholder="Buscar...">
+            <input type="text" class="input-control input-search" placeholder="Buscar..." [(ngModel)]="nameFilter">
         </div>
         <div class="content-btn-add">
-            <button class="btn-add">
-                + Nuevo
+            <button class="btn-add" (click)="openForm('Create')" >
+                <i class="fas fa-plus"></i> Nuevo
             </button>
         </div>
     </div>
@@ -14,23 +14,113 @@
     <div class="table-pokemon">
         <table>
             <thead>
-                <th>Nombre</th>
-                <th>Imagen</th>
-                <th>Ataque</th>
-                <th>Defensa</th>
-                <th>Acciones</th>
+                <th width="20%">Nombre</th>
+                <th width="20%">Imagen</th>
+                <th width="20%">Ataque</th>
+                <th width="20%">Defensa</th>
+                <th width="20%">Acciones</th>
             </thead>
             <tbody>
-                <ng-container *ngFor="let pokemon of pokemons">
+                <ng-container *ngFor="let pokemon of pokemons | filterPokemons : nameFilter ">
                     <tr>
                         <td>{{  pokemon.name | titlecase }}</td>
-                        <td> <img [src]="pokemon.image" height="60px" alt="pkm"> </td>
+                        <td class="center"> <img [src]="pokemon.image" height="60px" alt="pkm"> </td>
                         <td>{{  pokemon.attack }}</td>
                         <td>{{  pokemon.defense  }}</td>
-                        <td>iconos</td>
+                        <td class="btn-acciones center">
+                            <button class="tooltip top" (click)="updatePokemon(pokemon)">
+                                <span class="tiptext">Actualizar</span>
+                                <i type="button" class="fas fa-pen fa-fw"></i>
+                            </button>
+                            <button class="tooltip top"  (click)="deletePokemon(pokemon)" >
+                                <span class="tiptext">Eliminar</span>
+                                <i type="button" class="fas fa-trash fa-fw"></i>
+                            </button>
+                        </td>
                     </tr>
                 </ng-container>
             </tbody>
         </table>
     </div>
 </div>
+
+<ng-container *ngIf="activeForm">
+    <div class="content-form">
+        <div class="title-form">
+            <ng-container *ngIf="typeForm === 'Create' ">
+                Nuevo Pokemon
+            </ng-container>
+            <ng-container *ngIf="typeForm === 'Update' ">
+                Actualizar Pokemon
+            </ng-container>
+            
+        </div>
+        <form 
+            autocomplete="off"
+            [formGroup]="formAction"
+            (ngSubmit)="savePokemon()">
+            <div class="seccion">
+                <div class="content-section">
+                    <label for="">Nombre:</label>
+                    <input type="text" 
+                        class="input-control"
+                        [ngClass]="{ 'error': (form.name.errors )  }"
+                        formControlName="name"
+                        name="name"
+                    >
+
+                    <ng-container *ngIf="(form.name.errors ) ">
+                        <p id="pokemon__name-error" class="error-text">El nombre es requerido</p>
+                    </ng-container>
+                </div>
+                <div class="content-section">
+                    <label for="">Ataque:</label>
+                   0 <input type="range" 
+                      class="input-control" 
+                      min="0" max="100"
+                      [ngClass]="{ 'error': (form.attack.errors )  }"
+                        formControlName="attack"
+                        name="attack"
+                      > 100
+                </div>
+            </div>
+    
+            <div class="seccion">
+                <div class="content-section">
+                    <label for="">Imagen: </label>
+                    <input type="text" 
+                      class="input-control" 
+                      placeholder="url"
+                      [ngClass]="{ 'error': (form.image.errors )  }"
+                      formControlName="image"
+                      name="image" >
+
+                      <ng-container *ngIf="(form.image.errors ) ">
+                        <p id="pokemon__name-error" class="error-text">La imagen es requerida</p>
+                    </ng-container>
+                </div>
+                <div class="content-section">
+                    <label for="">Defensa:</label>
+                   0 <input type="range" 
+                            class="input-control" 
+                            min="0" max="100"
+                            [ngClass]="{ 'error': (form.defense.errors )  }"
+                            formControlName="defense"
+                            name="defense"
+                            > 100
+                </div>
+            </div>
+    
+            <div class="content-btn-option">
+                <button class="btn-add">
+                    <i class="fas fa-save"></i>
+                    Guardar
+                </button>
+                <button class="btn-add" (click)="closeForm()" >
+                    <i class="fas fa-times"></i>
+                    Cancelar
+                </button>
+            </div>
+        </form>
+    </div>
+</ng-container>
