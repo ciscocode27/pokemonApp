@@ -1,0 +1,47 @@
+<div class="content-app">
+    
+    <app-navbar></app-navbar>
+
+    <div class="content-crud">
+        
+        <app-listado></app-listado>
+
+        <div class="content-form">
+            <div class="title-form">
+                Nuevo Pokemon
+            </div>
+            <form>
+                <div class="seccion">
+                    <div class="content-section">
+                        <label for="">Nombre:</label>
+                        <input type="text" class="input-control">
+                    </div>
+                    <div class="content-section">
+                        <label for="">Ataque:</label>
+                       0 <input type="range" class="input-control" min="0" max="100"> 100
+                    </div>
+                </div>
+
+                <div class="seccion">
+                    <div class="content-section">
+                        <label for="">Imagen:</label>
+                        <input type="text" class="input-control" placeholder="url" >
+                    </div>
+                    <div class="content-section">
+                        <label for="">Defensa:</label>
+                       0 <input type="range" class="input-control" min="0" max="100"> 100
+                    </div>
+                </div>
+
+                <div class="content-btn-option">
+                    <button class="btn-add">
+                        Guardar
+                    </button>
+                    <button class="btn-add">
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

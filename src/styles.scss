@@ -1,1 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
+:root 
+{
+--color-principal-btn: #6359f1;
+}
+body{
+    margin: 0;
+}
+
+input.input-control[type=text]{
+    height: 35px;
+    border: 2px solid #8c9ca9;
+    border-radius: 4px;
+    padding-left: 10px;
+    &:focus-visible{
+        box-shadow: 0 0 0 0.2rem rgba(112, 116, 121, 0.25);
+        outline: none;
+    }
+}
+
+button{
+    cursor: pointer;
+    &:focus{
+        box-shadow: 0 0 0 0.2rem rgba(112, 116, 121, 0.25);
+    }
+}

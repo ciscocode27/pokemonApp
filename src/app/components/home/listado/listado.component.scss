@@ -1,0 +1,50 @@
+div.content-listado{
+    div.acciones{
+        margin-top: 12px;
+        display: flex;
+        justify-content: space-between;
+        div.content-buscador{
+            input.input-search[type=text]{
+                background-image: url('../../../../assets/icons/searchicon.png');
+                background-position: 10px 10px;
+                background-repeat: no-repeat;
+                padding-left: 35px;
+            }
+        }
+        button.btn-add{
+            background-color: var(--color-principal-btn);
+            color: white;
+            height: 40px;
+            border: none;
+            padding: 0px 22px;
+            font-size: 15px;
+            border-radius: 4px;
+        }
+    }
+
+    div.table-pokemon{
+        margin-top: 30px;
+        table{
+            width: 100%;
+            border: 2px solid #8c9ca9;
+            border-spacing: 0px;
+            th{
+                border-left: 2px solid #8c9ca9;
+                &:first-child{
+                    border-left: none;
+                }
+                border-bottom: 2px solid #8c9ca9; 
+                padding: 8px 0px; 
+            }
+            tbody{
+                td{
+                    border-left: 2px solid #8c9ca9;
+                    padding: 8px 12px;
+                    &:first-child{
+                        border-left: none;
+                    }
+                }
+            }
+        }
+    }
+}
