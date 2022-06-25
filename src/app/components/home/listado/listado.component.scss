@@ -24,6 +24,7 @@ div.content-listado{
 
     div.table-pokemon{
         margin-top: 30px;
+        background-color: white;
         table{
             width: 100%;
             border: 2px solid #8c9ca9;
@@ -37,11 +38,19 @@ div.content-listado{
                 padding: 8px 0px; 
             }
             tbody{
-                td{
-                    border-left: 2px solid #8c9ca9;
-                    padding: 8px 12px;
+                tr{
+                    td{
+                        border-left: 2px solid #8c9ca9;
+                        border-top: 2px solid #8c9ca9;
+                        padding: 8px 12px;
+                        &:first-child{
+                            border-left: none;
+                        }
+                    }
                     &:first-child{
-                        border-left: none;
+                        td{
+                            border-top: none;
+                        }
                     }
                 }
             }

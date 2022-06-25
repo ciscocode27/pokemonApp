@@ -21,13 +21,15 @@
                 <th>Acciones</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>Pikachu</td>
-                    <td>src</td>
-                    <td>65</td>
-                    <td>38</td>
-                    <td>iconos</td>
-                </tr>
+                <ng-container *ngFor="let pokemon of pokemons">
+                    <tr>
+                        <td>{{  pokemon.name | titlecase }}</td>
+                        <td> <img [src]="pokemon.image" height="60px" alt="pkm"> </td>
+                        <td>{{  pokemon.attack }}</td>
+                        <td>{{  pokemon.defense  }}</td>
+                        <td>iconos</td>
+                    </tr>
+                </ng-container>
             </tbody>
         </table>
     </div>
