@@ -53,6 +53,12 @@ export class ListadoComponent implements OnInit {
         this.activeForm = true;
         this.typeForm = type;
         this.pokemonUpdate = null;
+        this.formAction.setValue({
+            name: '',
+            image : '',
+            attack : '30',
+            defense : '30'
+        });
   }
 
   updatePokemon(pokemon:ResponsePokemon){
@@ -95,15 +101,22 @@ export class ListadoComponent implements OnInit {
         .subscribe( resp=>{
             console.log(resp);
             this.getAllPokemons();
+            this.submitted = false;
+        },error=>{
+            this.submitted = false;
         })
   }
 
   deletePokemon(pokemon:ResponsePokemon){
+    this.submitted = true;
     this.activeForm = false;
     this.pokemonService.deletePokemon(pokemon.id)
         .subscribe( resp=>{
             console.log(resp);
             this.getAllPokemons();
+            this.submitted = false;
+        },error=>{
+            this.submitted = false;
         })
   }
 

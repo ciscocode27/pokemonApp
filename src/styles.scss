@@ -26,6 +26,10 @@ button{
     &:focus{
         box-shadow: 0 0 0 0.2rem rgba(112, 116, 121, 0.25);
     }
+    &:disabled{
+        opacity: 0.5;
+        cursor:default;
+    }
 }
 
 .tooltip {

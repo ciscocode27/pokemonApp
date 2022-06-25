@@ -74,6 +74,9 @@
                     </ng-container>
                 </div>
                 <div class="content-section">
+                    <div class="value-range">
+                        ( {{ form.attack.value }} )
+                    </div>
                     <label for="">Ataque:</label>
                    0 <input type="range" 
                       class="input-control" 
@@ -100,6 +103,9 @@
                     </ng-container>
                 </div>
                 <div class="content-section">
+                    <div class="value-range">
+                        ( {{ form.defense.value }} )
+                    </div>
                     <label for="">Defensa:</label>
                    0 <input type="range" 
                             class="input-control" 
@@ -111,8 +117,8 @@
                 </div>
             </div>
     
-            <div class="content-btn-option">
-                <button class="btn-add">
+            <div class="content-btn-option"> {{ submitted }}
+                <button class="btn-add"  [disabled]="form.name.errors || form.image.errors || submitted " >
                     <i class="fas fa-save"></i>
                     Guardar
                 </button>
