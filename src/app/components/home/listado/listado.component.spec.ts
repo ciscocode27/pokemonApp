@@ -28,6 +28,11 @@ const SELECTORS = {
       },
       FORM:{
         form: (): HTMLFormElement => document.querySelector('#pokemon-form'),
+        inputName: (): HTMLInputElement => document.querySelector('#pokemon-form__name'),
+        inputNameError: (): HTMLDivElement => document.querySelector('#pokemon-form__name-error'),
+        inputImagen: (): HTMLInputElement => document.querySelector('#pokemon-form__image'),
+        inputImagenError: (): HTMLDivElement => document.querySelector('#pokemon-form__image-error'),
+        btnSave: (): HTMLButtonElement => document.querySelector('#pokemon-form__btn-save'),
       }
     },
   };
@@ -174,6 +179,54 @@ describe('ListadoComponent', () => {
     fixture.detectChanges();
 
     expect(form.tagName).toEqual('FORM')
+  }));
+
+
+  it('Los campos están vacíos y deben aparecer el mensaje de error y deshabilitar para guardar pokemon', () => {
+
+    let inputNameError: HTMLDivElement;
+    let inputImagenError: HTMLDivElement;
+    let btn: HTMLButtonElement;
+
+    component.ngOnInit();
+    component.activeForm = true;
+    fixture.detectChanges();
+    inputNameError = SELECTORS.POKEMON.FORM.inputNameError();
+    inputImagenError = SELECTORS.POKEMON.FORM.inputImagenError();
+    btn = SELECTORS.POKEMON.FORM.btnSave();
+
+    expect(btn.disabled).toEqual(true);
+    expect(inputNameError.textContent).toContain('El nombre es requerido');
+    expect(inputImagenError.textContent).toContain('La imagen es requerida');
+
+
+  });
+
+  it('Los campos están llenos y habilitar el boton de guardar pokemon', fakeAsync(() => {
+
+    const name = 'Pikachu';
+    const image = 'https://img.pokemondb.net/artwork/pikachu.jpg';
+    let inputNameError: HTMLDivElement;
+    let inputImagenError: HTMLDivElement;
+    let btn: HTMLButtonElement;
+
+    component.ngOnInit();
+    component.activeForm = true;
+    fixture.detectChanges();
+    eventInput(SELECTORS.POKEMON.FORM.inputName(), name);
+    eventInput(SELECTORS.POKEMON.FORM.inputImagen(), image);
+    fixture.detectChanges();
+    inputNameError = SELECTORS.POKEMON.FORM.inputNameError();
+    inputImagenError = SELECTORS.POKEMON.FORM.inputImagenError();
+    btn = SELECTORS.POKEMON.FORM.btnSave();
+    btn.click();
+    tick(1000);
+
+    expect(btn.disabled).toEqual(false);
+    expect(inputNameError).toBeNull();
+    expect(inputImagenError).toBeNull();
+
+
   }));
 
 
