@@ -7,7 +7,7 @@
             <input type="text" class="input-control input-search" placeholder="Buscar..." [(ngModel)]="nameFilter">
         </div>
         <div class="content-btn-add">
-            <button class="btn-add" (click)="openForm('Create')" >
+            <button class="btn-add" (click)="openForm(listEnumTypes.Create)" >
                 <i class="fas fa-plus"></i> Nuevo
             </button>
         </div>
@@ -49,10 +49,10 @@
 <ng-container *ngIf="activeForm">
     <div class="content-form">
         <div class="title-form">
-            <ng-container *ngIf="typeForm === 'Create' ">
+            <ng-container *ngIf="typeForm === listEnumTypes.Create ">
                 Nuevo Pokemon
             </ng-container>
-            <ng-container *ngIf="typeForm === 'Update' ">
+            <ng-container *ngIf="typeForm === listEnumTypes.Update ">
                 Actualizar Pokemon
             </ng-container>
             

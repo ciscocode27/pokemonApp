@@ -20,6 +20,7 @@ export class ListadoComponent implements OnInit {
     showAlert:boolean = false;
     messageAlert:string = '';
     codeMsg:number = 200;
+    listEnumTypes = TipoAccion;
 
   constructor(private pokemonService: PokemonService,
     private formBuilder: FormBuilder) { }
