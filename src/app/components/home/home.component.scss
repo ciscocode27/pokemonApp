@@ -4,10 +4,11 @@ div.content-app{
 
     div.content-crud{
         padding: 40px;
-        
+    }
 
-       
-
-        
+    @media only screen and (max-width: 992px) {
+        div.content-crud{
+            padding: 10px;
+        }
     }
 }
