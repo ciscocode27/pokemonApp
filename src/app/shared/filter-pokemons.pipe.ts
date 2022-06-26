@@ -10,7 +10,7 @@ export class FilterPokemonsPipe implements PipeTransform {
   transform(pokemons:ResponsePokemon[], search?:string): any {
        if( !pokemons ) return null;
        if( !search ) return pokemons;
-        console.log(search);
+        console.log(search,pokemons);
 
         let stringSearch = search.toLocaleLowerCase();
 

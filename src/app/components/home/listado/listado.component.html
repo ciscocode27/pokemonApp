@@ -4,17 +4,19 @@
     Listado de Pokemon
     <div class="acciones">
         <div class="content-buscador">
-            <input type="text" class="input-control input-search" placeholder="Buscar..." [(ngModel)]="nameFilter">
+            <input type="text" class="input-control input-search" placeholder="Buscar..." 
+            id="pokemon-list__filter"
+            [(ngModel)]="nameFilter">
         </div>
         <div class="content-btn-add">
-            <button class="btn-add" (click)="openForm(listEnumTypes.Create)" >
+            <button class="btn-add" id="pokemon-btn-add" (click)="openForm(listEnumTypes.Create)" >
                 <i class="fas fa-plus"></i> Nuevo
             </button>
         </div>
     </div>
 
     <div class="table-pokemon">
-        <table>
+        <table id="pokemon-list__table">
             <thead>
                 <th width="20%">Nombre</th>
                 <th width="20%">Imagen</th>
@@ -23,18 +25,20 @@
                 <th width="20%">Acciones</th>
             </thead>
             <tbody>
-                <ng-container *ngFor="let pokemon of pokemons | filterPokemons : nameFilter ">
-                    <tr>
-                        <td>{{  pokemon.name | titlecase }}</td>
-                        <td class="center"> <img [src]="pokemon.image" height="60px" alt="pkm"> </td>
-                        <td>{{  pokemon.attack }}</td>
-                        <td>{{  pokemon.defense  }}</td>
+                <ng-container *ngFor="let pokemon of pokemons | filterPokemons : nameFilter;let index = index ">
+                    <tr [id]="'pokemon-list__table-item-'+index+''">
+                        <td [id]="'pokemon-list__table-item-'+index+'-name'">{{  pokemon.name | titlecase }}</td>
+                        <td class="center"> 
+                            <img [id]="'pokemon-list__table-item-'+index+'-image'" [src]="pokemon.image" height="60px" alt="pkm">
+                        </td>
+                        <td [id]="'pokemon-list__table-item-'+index+'-atack'">{{  pokemon.attack }}</td>
+                        <td [id]="'pokemon-list__table-item-'+index+'-defense'">{{  pokemon.defense  }}</td>
                         <td class="btn-acciones center">
                             <button class="tooltip top" (click)="updatePokemon(pokemon)">
                                 <span class="tiptext">Actualizar</span>
                                 <i type="button" class="fas fa-pen fa-fw"></i>
                             </button>
-                            <button class="tooltip top"  (click)="deletePokemon(pokemon)" >
+                            <button class="tooltip top" [id]="'pokemon-list__table-item-'+index+'-btn-delete'"  (click)="deletePokemon(pokemon)" >
                                 <span class="tiptext">Eliminar</span>
                                 <i type="button" class="fas fa-trash fa-fw"></i>
                             </button>
@@ -58,6 +62,7 @@
             
         </div>
         <form 
+            id="pokemon-form"
             autocomplete="off"
             [formGroup]="formAction"
             (ngSubmit)="savePokemon()">
