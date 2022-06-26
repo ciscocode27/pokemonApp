@@ -29,7 +29,10 @@
                     <tr [id]="'pokemon-list__table-item-'+index+''">
                         <td [id]="'pokemon-list__table-item-'+index+'-name'">{{  pokemon.name | titlecase }}</td>
                         <td class="center"> 
-                            <img [id]="'pokemon-list__table-item-'+index+'-image'" [src]="pokemon.image" height="60px" alt="pkm">
+                            <img [id]="'pokemon-list__table-item-'+index+'-image'" 
+                            [src]="pokemon.image" height="60px" alt="pkm"
+                            (error)="onErrorImage(pokemon)"
+                            >
                         </td>
                         <td [id]="'pokemon-list__table-item-'+index+'-atack'">{{  pokemon.attack }}</td>
                         <td [id]="'pokemon-list__table-item-'+index+'-defense'">{{  pokemon.defense  }}</td>

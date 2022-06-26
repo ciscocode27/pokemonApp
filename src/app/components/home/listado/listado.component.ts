@@ -63,6 +63,9 @@ export class ListadoComponent implements OnInit {
             attack : '30',
             defense : '30'
         });
+        setTimeout(() => {
+            document.getElementById("pokemon-form").scrollIntoView({behavior: 'smooth'}) ;
+        }, 200);
   }
 
   updatePokemon(pokemon:ResponsePokemon){
@@ -75,6 +78,9 @@ export class ListadoComponent implements OnInit {
         defense : pokemon.defense
     });
     this.pokemonUpdate = pokemon;
+    setTimeout(() => {
+        document.getElementById("pokemon-form").scrollIntoView({behavior: 'smooth'}) ;
+    }, 200);
   }
 
   closeForm():void{
@@ -137,6 +143,10 @@ export class ListadoComponent implements OnInit {
 
   closeAlert(event){
     this.showAlert = false;
+}
+
+onErrorImage(pokemon:ResponsePokemon){
+    pokemon.image = 'https://www.audicomer.com.ec/wp-content/themes/consultix/images/no-image-found-360x260.png';
 }
 
 }
