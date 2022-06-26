@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 # Demo
 
-Demo Online [Pokemon APP By Francisco](https://ciscocode27.github.io/pokemonApp/)
+Demo Online [Pokemon APP By Francisco](https://ciscocode27.github.io/pokemonApp/#/main)
 
 ![](./src/assets/pokemonApp.png)
 
