@@ -110,4 +110,16 @@ div.content-form{
             margin: 0px 7px;
         }
     }
+
+}
+
+@media only screen and (max-width: 992px) {
+    div.content-form{
+        padding: 20px 10px;
+        div.seccion{
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+        }
+    }
 }
