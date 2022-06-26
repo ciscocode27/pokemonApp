@@ -23,7 +23,8 @@ const SELECTORS = {
         tableItemImage: (index: number): HTMLImageElement => document.querySelector(`#pokemon-list__table-item-${index}-image`),
         tableItemAtack: (index: number): HTMLElement => document.querySelector(`#pokemon-list__table-item-${index}-atack`),
         tableItemDefense: (index: number): HTMLElement => document.querySelector(`#pokemon-list__table-item-${index}-defense`),
-        tableItemBtnDelete: (index: number): HTMLButtonElement => document.querySelector(`#pokemon-list__table-item-${index}-btn-delete`)
+        tableItemBtnDelete: (index: number): HTMLButtonElement => document.querySelector(`#pokemon-list__table-item-${index}-btn-delete`),
+        tableItemBtnEdit: (index: number): HTMLButtonElement => document.querySelector(`#pokemon-list__table-item-${index}-btn-edit`)
       },
       FORM:{
         form: (): HTMLFormElement => document.querySelector('#pokemon-form'),
@@ -67,6 +68,7 @@ describe('ListadoComponent', () => {
 
     expect(inputSearch.tagName).toEqual('INPUT');
     expect(table.tagName).toEqual('TABLE');
+    expect(btnAdd.tagName).toEqual('BUTTON');    
   });
 
 
@@ -101,6 +103,38 @@ describe('ListadoComponent', () => {
 
   }));
 
+  it('Filtra los pokemons por el nombre (filtra correctamente)', fakeAsync(async() => {
+
+    let table: HTMLTableElement;
+    const name = 'Mewtwo';
+
+    const datos = await new PokemonMockService().getPokemonsByAuthor();
+    component.ngOnInit();
+    component.pokemons = datos;
+    eventInput(SELECTORS.POKEMON.LIST.inputSearch(), name);
+    tick(1000);
+    fixture.detectChanges();
+    table = SELECTORS.POKEMON.LIST.table();
+
+    expect(table.querySelector('tbody').childElementCount).toEqual(1);
+  }));
+
+  it('Filtra los pokemons por el nombre (no debe encontrar coincidencias)', fakeAsync(async() => {
+
+    let table: HTMLTableElement;
+    const name = 'Pikachu';
+
+    const datos = await new PokemonMockService().getPokemonsByAuthor();
+    component.ngOnInit();
+    component.pokemons = datos;
+    eventInput(SELECTORS.POKEMON.LIST.inputSearch(), name);
+    tick(1000);
+    fixture.detectChanges();
+    table = SELECTORS.POKEMON.LIST.table();
+
+    expect(table.querySelector('tbody').childElementCount).toEqual(0);
+  }));
+
 
   it('Dene comenzar con el formulario oculto', () => {
 
@@ -108,9 +142,39 @@ describe('ListadoComponent', () => {
 
     fixture.detectChanges();
 
-    console.log('form',form);
-    expect(form).toEqual(null)
+    expect(form).toBeNull()
   });
+
+  it('El formulario debe estar visible al dar click en boton +Nuevo', fakeAsync(() => {
+
+    const btnAdd = SELECTORS.POKEMON.LIST.btnAdd();
+    btnAdd.click();
+    fixture.detectChanges();
+    tick(1000);
+    const form = SELECTORS.POKEMON.FORM.form();
+
+    fixture.detectChanges();
+
+    expect(form.tagName).toEqual('FORM')
+  }));
+
+  it('El formulario debe estar visible al dar click en boton Editar', fakeAsync(async() => {
+
+    const datos = await new PokemonMockService().getPokemonsByAuthor();
+    component.ngOnInit();
+    component.pokemons = datos;
+    tick(1000);
+    fixture.detectChanges();
+    const btnEdit = SELECTORS.POKEMON.LIST.tableItemBtnEdit(1);
+    btnEdit.click();
+    fixture.detectChanges();
+    tick(1000);
+    const form = SELECTORS.POKEMON.FORM.form();
+
+    fixture.detectChanges();
+
+    expect(form.tagName).toEqual('FORM')
+  }));
 
 
 

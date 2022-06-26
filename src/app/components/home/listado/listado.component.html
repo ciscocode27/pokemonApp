@@ -34,7 +34,7 @@
                         <td [id]="'pokemon-list__table-item-'+index+'-atack'">{{  pokemon.attack }}</td>
                         <td [id]="'pokemon-list__table-item-'+index+'-defense'">{{  pokemon.defense  }}</td>
                         <td class="btn-acciones center">
-                            <button class="tooltip top" (click)="updatePokemon(pokemon)">
+                            <button class="tooltip top" [id]="'pokemon-list__table-item-'+index+'-btn-edit'" (click)="updatePokemon(pokemon)">
                                 <span class="tiptext">Actualizar</span>
                                 <i type="button" class="fas fa-pen fa-fw"></i>
                             </button>
