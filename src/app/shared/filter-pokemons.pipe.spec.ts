@@ -1,6 +1,6 @@
 import { FilterPokemonsPipe } from './filter-pokemons.pipe';
 
-describe('FilterUserByNamePipe', () => {
+describe('FilterPokemonsPipe', () => {
   it('create an instance', () => {
     const pipe = new FilterPokemonsPipe();
     expect(pipe).toBeTruthy();
@@ -39,8 +39,9 @@ describe('FilterUserByNamePipe', () => {
     }
  ];
 
-    it('pipe retorna uno o más resultados si encuentra coincidencia', ()=>{
+     it('pipe retorna uno o más resultados si encuentra coincidencia', ()=>{
         const search = 'Alakazam';
+
         const pipe = new FilterPokemonsPipe();
         const filtered = pipe.transform(dataFake, search);
         expect(filtered.length).toBeLessThanOrEqual(1);
@@ -48,11 +49,11 @@ describe('FilterUserByNamePipe', () => {
 
     it('pipe retorna un array vacio si no encuentra elementos', ()=>{
         const search = 'Pikachu';
-
+        
         const pipe = new FilterPokemonsPipe();
         const filtered = pipe.transform(dataFake, search);
         expect(filtered.length).toBe(0);
-    })
+    }) 
 
 
 });
