@@ -122,17 +122,20 @@ export class ListadoComponent implements OnInit {
   }
 
   deletePokemon(pokemon:ResponsePokemon){
-    this.submitted = true;
-    this.activeForm = false;
-    this.pokemonService.deletePokemon(pokemon.id)
-        .subscribe( resp=>{
-            console.log(resp);
-            this.getShowAlert(`Pokemon eliminado exitosamente!`,200);
-            this.getAllPokemons();
-            this.submitted = false;
-        },error=>{
-            this.submitted = false;
-        })
+    if(  confirm(`¿Estás seguro que deseas eliminar al pokemon ${pokemon.name} ?`) ){
+      this.submitted = true;
+      this.activeForm = false;
+      this.pokemonService.deletePokemon(pokemon.id)
+          .subscribe( resp=>{
+              console.log(resp);
+              this.getShowAlert(`Pokemon eliminado exitosamente!`,200);
+              this.getAllPokemons();
+              this.submitted = false;
+          },error=>{
+              this.submitted = false;
+          })
+    }
+    
   }
 
   getShowAlert(msg:string, code:number){
