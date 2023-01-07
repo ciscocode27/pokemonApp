@@ -14,3 +14,15 @@ export enum TipoAccion {
     Update = 'Update',
     Delete = 'DELETE'
   }
+
+export interface eventoForm{
+    formOpen:    boolean;
+    typeForm?:    TipoAccion;
+    pokemon?:    ResponsePokemon,
+    message?:    message
+}
+
+interface message{
+    title:  string;
+    code:   number;
+}

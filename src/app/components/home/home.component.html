@@ -1,9 +1,18 @@
 <div class="content-app">
     
+    <app-alert [message]="messageAlert" [code]="codeMsg" (closeAlertEvent)="closeAlert($event)" *ngIf="showAlert" ></app-alert>
+    
     <app-navbar></app-navbar>
 
     <div class="content-crud">
         
-        <app-listado></app-listado>
+        <ng-container *ngIf="!isFormOpen">
+            <app-listado></app-listado>
+        </ng-container>
+
+        <ng-container *ngIf="isFormOpen">
+            <app-formulario [datosForm]="datosForm"  ></app-formulario>
+        </ng-container>
+        
     </div>
 </div>

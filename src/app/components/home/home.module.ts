@@ -6,6 +6,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { NavbarComponent } from './navbar/navbar.component';
 import { ListadoComponent } from './listado/listado.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { FormularioComponent } from './formulario/formulario.component';
 
 
 
@@ -13,7 +14,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
   declarations: [
     HomeComponent, 
     NavbarComponent, 
-    ListadoComponent],
+    ListadoComponent, FormularioComponent],
   imports: [
     CommonModule,
     HomeRoutingModule,

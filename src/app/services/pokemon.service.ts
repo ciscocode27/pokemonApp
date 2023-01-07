@@ -1,8 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { ResponsePokemon, TipoAccion } from '../interfaces/pokemons';
+import { eventoForm, ResponsePokemon, TipoAccion } from '../interfaces/pokemons';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ export class PokemonService {
 
     baseUrlApiPokemon = environment.baseUrlApiPokemon;
     author = 1;
+
+    eventoFormulario: EventEmitter<eventoForm> = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 

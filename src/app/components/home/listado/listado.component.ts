@@ -13,130 +13,50 @@ export class ListadoComponent implements OnInit {
     pokemons: ResponsePokemon[] = [];
     nameFilter:string;
     activeForm:boolean = false;
-    typeForm:TipoAccion;
-    formAction: FormGroup;
-    submitted:boolean = false;
-    pokemonUpdate:ResponsePokemon;
     showAlert:boolean = false;
     messageAlert:string = '';
     codeMsg:number = 200;
     listEnumTypes = TipoAccion;
 
-  constructor(private pokemonService: PokemonService,
-    private formBuilder: FormBuilder) { }
+  constructor(private pokemonService: PokemonService) { }
 
   ngOnInit():void {
     this.getAllPokemons();
-    this.createFormAction();
   }
 
    getAllPokemons():void{
     this.pokemonService.getPokemonsByAuthor()
         .subscribe( resp =>{
-            console.log(resp)
             this.pokemons = resp;
-        })
-  }
-
-  createFormAction(){
-    this.formAction = this.formBuilder.group(
-        {
-            name: ['', Validators.required],
-            image: ['',Validators.required],
-            attack: ['30'],
-            defense: ['30']
-        }
-    )
-  }
-
-  get form(){
-    return this.formAction.controls;
-}
-
-  openForm(type:TipoAccion):void{
-        this.activeForm = true;
-        this.typeForm = type;
-        this.pokemonUpdate = null;
-        this.formAction.setValue({
-            name: '',
-            image : '',
-            attack : '30',
-            defense : '30'
-        });
-        setTimeout(() => {
-            document.getElementById("pokemon-form").scrollIntoView({behavior: 'smooth'}) ;
-        }, 200);
-  }
-
-  updatePokemon(pokemon:ResponsePokemon){
-    this.typeForm = TipoAccion.Update;
-    this.activeForm = true;
-    this.formAction.setValue({
-        name: pokemon.name,
-        image : pokemon.image,
-        attack : pokemon.attack,
-        defense : pokemon.defense
-    });
-    this.pokemonUpdate = pokemon;
-    setTimeout(() => {
-        document.getElementById("pokemon-form").scrollIntoView({behavior: 'smooth'}) ;
-    }, 200);
-  }
-
-  closeForm():void{
-    this.activeForm = false;
-  }
-
-  savePokemon(){
-    console.log(this.formAction.value)
-    this.submitted = true;
-    if( this.formAction.invalid ){
-        return false;
-    }
-    let idPokemon = null;
-    let pokemon = this.formAction.value;
-    if( this.typeForm === TipoAccion.Create ){
-        pokemon.hp = 100;
-        pokemon.type = 'pokemon';
-        pokemon.idAuthor = 1;
-    }
-    if( this.typeForm === TipoAccion.Update ){
-        pokemon.hp = this.pokemonUpdate.hp;
-        pokemon.type = this.pokemonUpdate.type;
-        pokemon.idAuthor =  this.pokemonUpdate.id_author;
-        pokemon.id =  this.pokemonUpdate.id;
-        idPokemon = this.pokemonUpdate.id
-    }
-    this.pokemonService.createUpdatePokemon(pokemon, this.typeForm,idPokemon)
-        .subscribe( resp=>{
-            console.log(resp);
-            let typeString:string = 'creado';
-            if( this.typeForm === TipoAccion.Update )  typeString = 'actualizado';
-            this.getShowAlert(`Pokemon ${typeString} exitosamente!`,200);
-            this.getAllPokemons();
-            this.submitted = false;
         },error=>{
-            this.getShowAlert('Ocurrió un error inesperado!',400);
-            this.submitted = false;
+            this.getShowAlert(`Ocurrió un error inesperado!`,400);
         })
   }
 
   deletePokemon(pokemon:ResponsePokemon){
     if(  confirm(`¿Estás seguro que deseas eliminar al pokemon ${pokemon.name} ?`) ){
-      this.submitted = true;
-      this.activeForm = false;
       this.pokemonService.deletePokemon(pokemon.id)
           .subscribe( resp=>{
-              console.log(resp);
               this.getShowAlert(`Pokemon eliminado exitosamente!`,200);
-              this.getAllPokemons();
-              this.submitted = false;
+              this.getAllPokemons()
           },error=>{
-              this.submitted = false;
+            this.getShowAlert(`Ocurrió un error inesperado!`,400);
           })
     }
     
   }
+
+  updatePokemon(pokemon:ResponsePokemon){
+    this.pokemonService.eventoFormulario.emit(
+        {
+            formOpen: true,
+            typeForm : TipoAccion.Update,
+            pokemon: pokemon
+        }
+    );
+  }
+
+
 
   getShowAlert(msg:string, code:number){
     this.codeMsg = code;
@@ -150,6 +70,15 @@ export class ListadoComponent implements OnInit {
 
 onErrorImage(pokemon:ResponsePokemon){
     pokemon.image = 'https://www.audicomer.com.ec/wp-content/themes/consultix/images/no-image-found-360x260.png';
+}
+
+openForm(type:TipoAccion){
+    this.pokemonService.eventoFormulario.emit(
+        {
+            formOpen: true,
+            typeForm : type
+        }
+    )
 }
 
 }

@@ -1,0 +1,94 @@
+
+<div class="content-form">
+    <div class="title-form">
+        
+        <ng-container *ngIf="typeForm === listEnumTypes.Create ">
+            Nuevo Pokemon
+        </ng-container>
+        <ng-container *ngIf="typeForm === listEnumTypes.Update ">
+            Actualizar Pokemon
+        </ng-container>
+        
+    </div>
+    <form 
+        id="pokemon-form"
+        autocomplete="off"
+        [formGroup]="formAction"
+        (ngSubmit)="savePokemon()">
+        <div class="seccion">
+            <div class="content-section">
+                <label for="">Nombre:</label>
+                <input type="text" 
+                    class="input-control"
+                    id="pokemon-form__name"
+                    [ngClass]="{ 'error': (form.name.errors && submitted  ) || (form.name.dirty && form.name.errors  ) }"
+                    formControlName="name"
+                    name="name"
+                >
+
+                <ng-container *ngIf="(form.name.errors   && submitted  ) || (form.name.dirty && form.name.errors  ) ">
+                    <p id="pokemon-form__name-error" class="error-text">El nombre es requerido</p>
+                </ng-container>
+            </div>
+            <div class="content-section">
+                <div class="value-range">
+                    ( {{ form.attack.value }} )
+                </div>
+                <label for="">Ataque:</label>
+               0 <input type="range" 
+                  class="input-control" 
+                  min="0" max="100"
+                  [ngClass]="{ 'error': (form.attack.errors )  }"
+                    formControlName="attack"
+                    name="attack"
+                  > 100
+            </div>
+        </div>
+
+        <div class="seccion">
+            <div class="content-section">
+                <label for="">Imagen: </label>
+                <input type="text" 
+                  class="input-control" 
+                  placeholder="url"
+                  id="pokemon-form__image"
+                  [ngClass]="{ 'error': (form.image.errors   && submitted  ) || (form.image.dirty && form.image.errors  ) }"
+                  formControlName="image"
+                  name="image" >
+
+                  <ng-container *ngIf="(form.image.errors?.required   && submitted  ) || (form.image.dirty && form.image.errors?.required  ) ">
+                    <p id="pokemon-form__image-error" class="error-text">La imagen es requerida</p>
+                </ng-container>
+
+                <ng-container *ngIf="(form.image.errors?.pattern   && submitted  ) || (form.image.dirty && form.image.errors?.pattern  )  ">
+                    <p id="pokemon-form__url-error" class="error-text">El formato de la imagen es incorrecto</p>
+                </ng-container>
+                
+            </div>
+            <div class="content-section">
+                <div class="value-range">
+                    ( {{ form.defense.value }} )
+                </div>
+                <label for="">Defensa:</label>
+               0 <input type="range" 
+                        class="input-control" 
+                        min="0" max="100"
+                        [ngClass]="{ 'error': (form.defense.errors  )  }"
+                        formControlName="defense"
+                        name="defense"
+                        > 100
+            </div>
+        </div>
+
+        <div class="content-btn-option">
+            <button class="btn-add" type="submit" id="pokemon-form__btn-save">
+                <i class="fas fa-save"></i>
+                Guardar
+            </button>
+            <button class="btn-add" (click)="closeForm()" >
+                <i class="fas fa-times"></i>
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>
