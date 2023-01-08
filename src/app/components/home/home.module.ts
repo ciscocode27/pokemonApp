@@ -16,11 +16,11 @@ import { FormularioComponent } from './formulario/formulario.component';
     NavbarComponent, 
     ListadoComponent, FormularioComponent],
   imports: [
-    CommonModule,
     HomeRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    SharedModule
+    SharedModule,
+    CommonModule
   ]
 })
 export class HomeModule { }

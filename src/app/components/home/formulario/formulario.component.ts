@@ -14,7 +14,6 @@ export class FormularioComponent implements OnInit {
     formAction: FormGroup;
     submitted:boolean = false;
     pokemonUpdate:ResponsePokemon;
-    activeForm:boolean = false;
     listEnumTypes = TipoAccion;
     message = {
         title: '',
@@ -22,14 +21,14 @@ export class FormularioComponent implements OnInit {
     };
     urlValida:boolean = true;;
 
-    @Input() datosForm:eventoForm;
+    @Input() datosForm:eventoForm = { formOpen: false } ;
     imagePattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
 
   constructor(private pokemonService: PokemonService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.typeForm = this.datosForm.typeForm;
+    this.typeForm = this.datosForm.typeForm ;
     this.createFormAction();
     if(  this.typeForm === this.listEnumTypes.Update ){
         this.updatePokemon(this.datosForm.pokemon);
@@ -84,7 +83,6 @@ export class FormularioComponent implements OnInit {
     }
     this.pokemonService.createUpdatePokemon(pokemon, this.typeForm,idPokemon)
         .subscribe( resp=>{
-            console.log(resp);
             let typeString:string = 'creado';
             if( this.typeForm === TipoAccion.Update )  typeString = 'actualizado';
             this.message = { title : `Pokemon ${typeString} exitosamente!` , code: 200 };
