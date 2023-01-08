@@ -15,42 +15,58 @@
         </div>
     </div>
 
-    <div class="table-pokemon">
-        <table id="pokemon-list__table">
-            <thead>
-                <th width="20%">Nombre</th>
-                <th width="20%">Imagen</th>
-                <th width="20%">Ataque</th>
-                <th width="20%">Defensa</th>
-                <th width="20%">Acciones</th>
-            </thead>
-            <tbody>
-                <ng-container *ngFor="let pokemon of pokemons | filterPokemons : nameFilter;let index = index ">
-                    <tr [id]="'pokemon-list__table-item-'+index+''">
-                        <td [id]="'pokemon-list__table-item-'+index+'-name'">{{  pokemon.name | titlecase }}</td>
-                        <td class="center"> 
-                            <img [id]="'pokemon-list__table-item-'+index+'-image'" 
-                            [src]="pokemon.image" height="60px" alt="pkm"
-                            (error)="onErrorImage(pokemon)"
-                            >
-                        </td>
-                        <td [id]="'pokemon-list__table-item-'+index+'-atack'">{{  pokemon.attack }}</td>
-                        <td [id]="'pokemon-list__table-item-'+index+'-defense'">{{  pokemon.defense  }}</td>
-                        <td class="btn-acciones center">
-                            <button class="tooltip top" [id]="'pokemon-list__table-item-'+index+'-btn-edit'" (click)="updatePokemon(pokemon)">
-                                <span class="tiptext">Actualizar</span>
-                                <i type="button" class="fas fa-pen fa-fw"></i>
-                            </button>
-                            <button class="tooltip top" [id]="'pokemon-list__table-item-'+index+'-btn-delete'"  (click)="deletePokemon(pokemon)" >
-                                <span class="tiptext">Eliminar</span>
-                                <i type="button" class="fas fa-trash fa-fw"></i>
-                            </button>
-                        </td>
-                    </tr>
-                </ng-container>
-            </tbody>
-        </table>
-    </div>
+    
+    <ng-container *ngIf="pokemons.length > 0">
+        <div class="table-pokemon">
+            <table id="pokemon-list__table">
+                <thead>
+                    <th width="20%">Nombre</th>
+                    <th width="20%">Imagen</th>
+                    <th width="20%">Ataque</th>
+                    <th width="20%">Defensa</th>
+                    <th width="20%">Acciones</th>
+                </thead>
+                <tbody>
+                    <ng-container *ngFor="let pokemon of pokemons | filterPokemons : nameFilter;let index = index ">
+                        <tr [id]="'pokemon-list__table-item-'+index+''">
+                            <td [id]="'pokemon-list__table-item-'+index+'-name'">{{  pokemon.name | titlecase }}</td>
+                            <td class="center"> 
+                                <img [id]="'pokemon-list__table-item-'+index+'-image'" 
+                                [src]="pokemon.image" height="60px" alt="pkm"
+                                (error)="onErrorImage(pokemon)"
+                                >
+                            </td>
+                            <td [id]="'pokemon-list__table-item-'+index+'-atack'">{{  pokemon.attack }}</td>
+                            <td [id]="'pokemon-list__table-item-'+index+'-defense'">{{  pokemon.defense  }}</td>
+                            <td class="btn-acciones center">
+                                <button class="tooltip top" [id]="'pokemon-list__table-item-'+index+'-btn-edit'" (click)="updatePokemon(pokemon)">
+                                    <span class="tiptext">Actualizar</span>
+                                    <i type="button" class="fas fa-pen fa-fw"></i>
+                                </button>
+                                <button class="tooltip top" [id]="'pokemon-list__table-item-'+index+'-btn-delete'"  (click)="deletePokemon(pokemon)" >
+                                    <span class="tiptext">Eliminar</span>
+                                    <i type="button" class="fas fa-trash fa-fw"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </tbody>
+            </table>
+        </div>
+    </ng-container>
+
+    <ng-container *ngIf="pokemons.length === 0">
+        <div class="no-data">
+           <div>
+                <img src="assets/no-datap.png" alt="no-data">
+           </div>
+            <div>
+                No hay pokemones disponibles por el momento.
+            </div>
+        </div>
+    </ng-container>
+    
+
 </div>
 
 

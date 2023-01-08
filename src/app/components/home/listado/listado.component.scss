@@ -68,5 +68,11 @@ div.content-listado{
             }
         }
     }
+
+    .no-data{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
 }
 
