@@ -182,20 +182,22 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
         this.pokemonService = pokemonService;
         this.formBuilder = formBuilder;
         this.submitted = false;
-        this.activeForm = false;
         this.listEnumTypes = src_app_interfaces_pokemons__WEBPACK_IMPORTED_MODULE_3__["TipoAccion"];
         this.message = {
           title: '',
           code: null
         };
         this.urlValida = true;
+        this.datosForm = {
+          formOpen: false
+        };
         this.imagePattern = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)?/gi;
       }
 
       _createClass(FormularioComponent, [{
         key: "ngOnInit",
         value: function ngOnInit() {
-          this.typeForm = this.datosForm.typeForm || this.listEnumTypes.Create;
+          this.typeForm = this.datosForm.typeForm;
           this.createFormAction();
 
           if (this.typeForm === this.listEnumTypes.Update) {
@@ -257,7 +259,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
           }
 
           this.pokemonService.createUpdatePokemon(pokemon, this.typeForm, idPokemon).subscribe(function (resp) {
-            console.log(resp);
             var typeString = 'creado';
             if (_this.typeForm === src_app_interfaces_pokemons__WEBPACK_IMPORTED_MODULE_3__["TipoAccion"].Update) typeString = 'actualizado';
             _this.message = {
@@ -580,7 +581,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
     HomeModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
       declarations: [_home_component__WEBPACK_IMPORTED_MODULE_3__["HomeComponent"], _navbar_navbar_component__WEBPACK_IMPORTED_MODULE_6__["NavbarComponent"], _listado_listado_component__WEBPACK_IMPORTED_MODULE_7__["ListadoComponent"], _formulario_formulario_component__WEBPACK_IMPORTED_MODULE_9__["FormularioComponent"]],
-      imports: [_angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"], _home_routing_module__WEBPACK_IMPORTED_MODULE_4__["HomeRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"], src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_8__["SharedModule"]]
+      imports: [_home_routing_module__WEBPACK_IMPORTED_MODULE_4__["HomeRoutingModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["FormsModule"], _angular_forms__WEBPACK_IMPORTED_MODULE_5__["ReactiveFormsModule"], src_app_shared_shared_module__WEBPACK_IMPORTED_MODULE_8__["SharedModule"], _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"]]
     })], HomeModule);
     /***/
   },
