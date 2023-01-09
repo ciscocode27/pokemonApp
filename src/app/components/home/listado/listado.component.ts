@@ -17,6 +17,7 @@ export class ListadoComponent implements OnInit {
     messageAlert:string = '';
     codeMsg:number = 200;
     listEnumTypes = TipoAccion;
+    noData:boolean = false;
 
   constructor(private pokemonService: PokemonService) { }
 
@@ -28,6 +29,7 @@ export class ListadoComponent implements OnInit {
     this.pokemonService.getPokemonsByAuthor()
         .subscribe( resp =>{
             this.pokemons = resp;
+            if( this.pokemons.length === 0 ) this.noData = true;
         },error=>{
             this.getShowAlert(`Ocurrió un error inesperado!`,400);
         })
