@@ -15,8 +15,44 @@
         </div>
     </div>
 
+   <!--  <ng-container>
+        <div class="cards">
+            <ng-container *ngFor="let pokemon of pokemons | filterPokemons : nameFilter;let index = index ">
+                <div class="card-pokemon">
+                    <div class="image">
+                        <img [id]="'pokemon-list__table-item-'+index+'-image'" 
+                                [src]="pokemon.image" height="60px" alt="pkm"
+                                (error)="onErrorImage(pokemon)"
+                                >
+                    </div>
+                    <div class="labels">
+                        <div>
+                            <label>Nombre:</label> {{  pokemon.name | titlecase }}
+                        </div>
+                        <div>
+                            <label>Ataque:</label> {{  pokemon.attack }}
+                        </div>
+                        <div>
+                            <label>Defensa:</label> {{  pokemon.defense }}
+                        </div>
+                    </div>
+                    <div class="opciones">
+                        <button class="tooltip top" (click)="updatePokemon(pokemon)">
+                            <span class="tiptext">Actualizar</span>
+                            <i type="button" class="fas fa-pen fa-fw"></i>
+                        </button>
+                        <button class="tooltip top"  (click)="deletePokemon(pokemon)" >
+                            <span class="tiptext">Eliminar</span>
+                            <i type="button" class="fas fa-trash fa-fw"></i>
+                        </button>
+                    </div>
+                </div>
+            </ng-container>
+        </div>
+    </ng-container> -->
+
     
-    <ng-container *ngIf="pokemons.length > 0">
+<ng-container *ngIf="pokemons.length > 0">
         <div class="table-pokemon">
             <table id="pokemon-list__table">
                 <thead>
@@ -54,6 +90,7 @@
             </table>
         </div>
     </ng-container>
+    
 
     <ng-container *ngIf="noData">
         <div class="no-data">

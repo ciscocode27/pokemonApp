@@ -69,10 +69,73 @@ div.content-listado{
         }
     }
 
+    div.cards{
+        display: grid;
+        grid-template-columns: auto auto auto auto;
+        padding: 10px;
+        grid-gap: 25px;
+        margin-top: 30px;
+        div.card-pokemon{
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            &:hover{
+                box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+            }
+            div.image{
+                width: 140px;
+                height: 140px;
+                text-align: center;
+                margin: auto;
+                border-radius: 100%;
+                img{
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            div.labels{
+                margin-top: 20px;
+            }
+            div.opciones{
+                margin-top: 10px;
+                display: flex;
+                justify-content: space-between;
+                button{
+                    border:none;
+                    margin: 0px 8px;
+                    color: var(--color-principal-btn);
+                    background-color: white;
+                    i{
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+
     .no-data{
         display: flex;
         flex-direction: column;
         align-items: center;
+    }
+
+    @media only screen and (max-width: 800px) {
+        div.cards{
+            grid-template-columns: auto auto auto;
+        }
+    }
+
+    @media only screen and (max-width: 645px) {
+        div.cards{
+            grid-template-columns: auto auto;
+        }
+    }
+
+    @media only screen and (max-width: 500px) {
+        div.cards{
+            grid-template-columns: auto;
+        }
     }
 }
 
